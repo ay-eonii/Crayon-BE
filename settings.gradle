@@ -1,1 +1,5 @@
 rootProject.name = 'yoyomo'
+
+include ':api'
+include ':application'
+include ':infra'

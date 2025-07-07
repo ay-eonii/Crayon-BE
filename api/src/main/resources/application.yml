@@ -1,0 +1,79 @@
+spring:
+  profiles:
+    active: local
+
+springdoc:
+  default-consumes-media-type: application/json
+  default-produces-media-type: application/json
+  use-fqn: true
+  swagger-ui:
+    path: /
+    disable-swagger-default-url: true
+    display-request-duration: true
+    operations-sorter: method
+    tags-sorter: alpha
+
+lambda:
+  uri: ${LAMBDA_URI}
+
+mail:
+  lambda:
+    arn: ${MAIL_LAMBDA_ARN}
+  scheduler:
+    arn: ${TARGET_ROLE_ARN}
+
+cloud:
+  aws:
+    credentials:
+      accessKey: ${AWS_ACCESS_KEY_ID}
+      secretKey: ${AWS_SECRET_ACCESS_KEY}
+      mailAccessKey: ${MAIL_AWS_ACCESS_KEY_ID}
+      mailSecretKey: ${MAIL_AWS_SECRET_ACCESS_KEY}
+    region:
+      static: ap-northeast-2
+    stack:
+      auto: false
+
+application:
+  bucket:
+    name: crayon-image
+
+kakao:
+  token_uri: ${KAKAO_TOKEN_URI}
+  redirect_uri: ${KAKAO_REDIRECT_URI}
+  grant_type: ${KAKAO_GRANT_TYPE}
+  client_id: ${KAKAO_CLIENT_ID}
+  user_info_uri: ${KAKAO_USER_INFO_URI}
+
+crayon:
+  jwt:
+    key: ${JWT_ACCESS_SECRET}
+    access:
+      expiration: 1800000
+      header: Authorization
+    refresh:
+      expiration: 604800000
+      header: Authorization-refresh
+    issuer: ${JWT_ISSUER}
+  monitor:
+    host: ${CRAYON_MONITOR_HOST}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: ${CRAYON_MONITOR_ENDPOINT}
+  metrics:
+    distribution:
+      percentiles:
+        http.server.requests: [ 0.95, 0.99 ]
+      percentiles-histogram:
+        http.server.requests: true
+  endpoint:
+    metrics:
+      enabled: true
+
+server:
+  tomcat:
+    mbeanregistry:
+      enabled: true

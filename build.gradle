@@ -4,11 +4,15 @@ plugins {
     id 'io.spring.dependency-management' version '1.1.4'
 }
 
-group = 'com'
-version = '0.0.1-SNAPSHOT'
 
-java {
+allprojects {
+    group = 'com'
+    version = '0.0.1-SNAPSHOT'
     sourceCompatibility = '17'
+
+    repositories {
+        mavenCentral()
+    }
 }
 
 configurations {
@@ -17,85 +21,25 @@ configurations {
     }
 }
 
-repositories {
-    mavenCentral()
-}
+subprojects { // 각 모듈에 적용할 공통 설정
+    apply plugin: 'java'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
 
-dependencies {
+    dependencies {
+        implementation 'org.springframework.boot:spring-boot-starter'
+        implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+        testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
-    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-    implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
-    implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation 'org.springframework.boot:spring-boot-starter-validation'
-    compileOnly 'org.projectlombok:lombok'
-    annotationProcessor 'org.projectlombok:lombok'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-
-    // swagger 추가
-    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.6.0'
-
-    // MySQL
-    runtimeOnly 'com.mysql:mysql-connector-j'
-
-    // mapstruct 추가
-    implementation 'org.mapstruct:mapstruct:1.5.5.Final'
-    annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.5.Final'
-    testAnnotationProcessor "org.mapstruct:mapstruct-processor:1.5.5.Final"
-
-    // jwt 추가
-    implementation 'com.auth0:java-jwt:4.5.0'
-
-    // 카카오톡 추가
-    implementation('org.springframework.boot:spring-boot-starter-oauth2-client') {
-        exclude group: 'org.springframework.security', module: 'spring-security-core'
-        exclude group: 'org.springframework.security', module: 'spring-security-config'
-        exclude group: 'org.springframework.security', module: 'spring-security-web'
+        compileOnly 'org.projectlombok:lombok'
+        annotationProcessor 'org.projectlombok:lombok'
     }
-    // 레디스 추가
-    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
 
-    implementation 'org.springframework.boot:spring-boot-starter-webflux'
-
-    //S3 추가
-    implementation 'software.amazon.awssdk:s3:2.20.7'
-
-    //cloudfront 추가
-    implementation 'software.amazon.awssdk:cloudfront:2.20.12'
-
-    //route53추가
-    implementation 'software.amazon.awssdk:route53:2.20.12'
-    implementation 'software.amazon.awssdk:core:2.20.2'
-    implementation 'software.amazon.awssdk:regions:2.20.2'
-
-    //SES 추가
-    implementation 'software.amazon.awssdk:ses:2.27.8'
-
-    //DynamoDB 추가
-    implementation 'software.amazon.awssdk:dynamodb:2.28.10'
-    implementation 'software.amazon.awssdk:dynamodb-enhanced:2.28.10'
-
-    //EventBridgeScheduler 추가
-    implementation 'software.amazon.awssdk:scheduler:2.27.24'
-
-    //HTML parser Jsoup
-    implementation 'org.jsoup:jsoup:1.17.2'
-
-    //Lambda 추가
-    implementation 'software.amazon.awssdk:lambda:2.26.4'
-
-    runtimeOnly 'com.h2database:h2'
-
-    // spring cache
-    implementation 'org.springframework.boot:spring-boot-starter-cache'
-
-    // redisson
-    implementation 'org.redisson:redisson:3.45.1'
-
-    // monitoring
-    implementation 'org.springframework.boot:spring-boot-starter-actuator'
-    implementation 'io.micrometer:micrometer-registry-prometheus'
+    tasks.named('test') {
+        useJUnitPlatform()
+    }
 }
 
-tasks.named('test') {
-    useJUnitPlatform()
-}
+bootJar { enabled = false }
+
+jar { enabled = true }
