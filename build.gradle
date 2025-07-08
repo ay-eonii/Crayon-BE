@@ -21,6 +21,9 @@ configurations {
     }
 }
 
+bootJar { enabled = false }
+jar { enabled = true }
+
 subprojects { // 각 모듈에 적용할 공통 설정
     apply plugin: 'java'
     apply plugin: 'org.springframework.boot'
@@ -39,7 +42,3 @@ subprojects { // 각 모듈에 적용할 공통 설정
         useJUnitPlatform()
     }
 }
-
-bootJar { enabled = false }
-
-jar { enabled = true }

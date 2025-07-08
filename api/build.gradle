@@ -16,8 +16,6 @@ dependencies {
 tasks.named('test') {
     useJUnitPlatform()
 }
-springBoot {
-    mainClass = 'com.api.ApiApplication'
-}
 
-
+bootJar { enabled = true }
+jar { enabled = false }
