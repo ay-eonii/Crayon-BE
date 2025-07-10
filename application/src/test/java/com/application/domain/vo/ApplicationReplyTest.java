@@ -1,4 +1,4 @@
-package com.domain.application.domain.vo;
+package com.application.domain.vo;
 
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
@@ -7,12 +7,6 @@ import java.util.List;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import com.application.domain.vo.Applicant;
-import com.application.domain.vo.ApplicationReply;
-import com.application.domain.vo.Question;
-import com.application.domain.vo.QuestionReply;
-import com.application.domain.vo.Reply;
 
 class ApplicationReplyTest {
 

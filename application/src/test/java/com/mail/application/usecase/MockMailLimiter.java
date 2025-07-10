@@ -1,4 +1,4 @@
-package com.domain.mail.application.usecase;
+package com.mail.application.usecase;
 
 import java.util.UUID;
 

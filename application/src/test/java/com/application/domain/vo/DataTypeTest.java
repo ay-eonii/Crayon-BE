@@ -1,4 +1,4 @@
-package com.domain.application.domain.vo;
+package com.application.domain.vo;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -6,7 +6,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import com.application.domain.vo.DataType;
 import com.application.exception.InvalidDataType;
 
 class DataTypeTest {

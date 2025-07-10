@@ -1,4 +1,4 @@
-package com.domain.mail.application.usecase;
+package com.mail.application.usecase;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -9,9 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import com.domain.ApplicationTest;
-
-class MailManageUseCaseImplTest extends ApplicationTest {
+class MailManageUseCaseImplTest {
 
 	private static final UUID clubId = UUID.randomUUID();
 

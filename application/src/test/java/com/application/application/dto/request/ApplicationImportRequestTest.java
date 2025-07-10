@@ -1,4 +1,4 @@
-package com.domain.application.application.dto.request;
+package com.application.application.dto.request;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -8,10 +8,6 @@ import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import com.application.application.dto.request.ApplicationImportRequest;
-import com.application.application.dto.request.DataRequest;
-import com.application.application.dto.request.QuestionRequest;
-import com.application.application.dto.request.RespondentRequest;
 import com.application.domain.vo.ApplicationReply;
 import com.application.domain.vo.QuestionReply;
 

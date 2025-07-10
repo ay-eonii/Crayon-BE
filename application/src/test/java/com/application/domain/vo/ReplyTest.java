@@ -1,12 +1,9 @@
-package com.domain.application.domain.vo;
+package com.application.domain.vo;
 
 import static org.assertj.core.api.Assertions.*;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import com.application.domain.vo.DataType;
-import com.application.domain.vo.Reply;
 
 class ReplyTest {
 

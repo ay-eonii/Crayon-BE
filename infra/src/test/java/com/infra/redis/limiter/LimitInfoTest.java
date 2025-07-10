@@ -1,4 +1,4 @@
-package com.domain.mail.domain.entity;
+package com.infra.redis.limiter;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -9,10 +9,7 @@ import java.time.ZoneOffset;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import com.domain.ApplicationTest;
-import com.infra.redis.limiter.LimitInfo;
-
-class LimitInfoTest extends ApplicationTest {
+class LimitInfoTest {
 
 	@DisplayName("만료 시각은 다음 날 자정이다.")
 	@Test
