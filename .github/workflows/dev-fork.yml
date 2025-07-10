@@ -50,7 +50,8 @@ jobs:
             ${{ runner.os }}-gradle-
       # gradle 빌드
       - name: Build with Gradle Wrapper
-        run: ./gradlew clean build \
+        run: |
+          ./gradlew clean build \
           --parallel \
           --configure-on-demand \
 
