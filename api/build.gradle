@@ -1,0 +1,14 @@
+dependencies {
+    implementation project(':infra')
+    implementation project(':application')
+    
+    testImplementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
+    testImplementation 'com.h2database:h2'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
+
+bootJar { enabled = true }
+jar { enabled = false }

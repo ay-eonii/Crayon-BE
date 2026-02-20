@@ -1,0 +1,67 @@
+package com.application.domain.service;
+
+import com.application.domain.entity.Application;
+import com.application.domain.repository.ApplicationRepository;
+import com.application.domain.repository.dto.ApplicationWithStatus;
+import com.application.domain.repository.dto.ProcessApplicant;
+import com.application.exception.ApplicationNotFoundException;
+import com.recruitment.domain.entity.Process;
+import com.user.domain.entity.User;
+import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+import java.util.stream.Collectors;
+
+@Service
+@RequiredArgsConstructor
+public class ApplicationGetService {
+
+    private final ApplicationRepository applicationRepository;
+
+    public List<Application> findAll(User user) {
+        return applicationRepository.findAllByUserAndDeletedAtIsNull(user);
+    }
+
+    public List<Application> findAll(Long processId, int pageNumber, int pageSize) {
+        Pageable pageable = PageRequest.of(pageNumber, pageSize);
+        return applicationRepository.findByProcessIdAndDeletedAtIsNull(processId, pageable);
+    }
+
+    public Page<ApplicationWithStatus> findAll(Process process, Pageable pageable) {
+        return applicationRepository.findAllWithStatusByProcess(process, pageable);
+    }
+
+    public List<Application> findAllOrderByName(Process process) {
+        return applicationRepository.findAllByProcessOrderByUserName(process);
+    }
+
+    public List<ApplicationWithStatus> findAllWithProcessResult(Process process) {
+        return applicationRepository.findAllWithStatusByProcess(process);
+    }
+
+    public Application find(String id) {
+        return applicationRepository.findByIdAndDeletedAtIsNull(UUID.fromString(id))
+                .orElseThrow(ApplicationNotFoundException::new);
+    }
+
+    public Application find(UUID applicationId) {
+        return applicationRepository.findByIdAndDeletedAtIsNull(applicationId)
+                .orElseThrow(ApplicationNotFoundException::new);
+    }
+
+    public Page<Application> findByName(String name, Process process, Pageable pageable) {
+        return applicationRepository.findAllByUserNameContainingAndProcessAndDeletedAtIsNull(name, process, pageable);
+    }
+
+    public Map<Process, Long> countInProcesses(UUID recruitmentId, List<Process> processes) {
+        return applicationRepository.countByRecruitmentAndProcess(recruitmentId, processes)
+                .stream()
+                .collect(Collectors.toMap(ProcessApplicant::process, ProcessApplicant::applicantCount));
+    }
+}
